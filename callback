@@ -1,0 +1,28 @@
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/api/deleteUserData', async (req, res) => {
+  const { userId } = req.body;
+  try {
+    // Тут додайте логіку видалення даних з бази даних для користувача з userId
+    await deleteUserData(userId);
+    res.status(200).json({ message: 'User data deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting user data.' });
+  }
+});
+
+// Функція-імітація видалення даних
+function deleteUserData(userId) {
+  return new Promise((resolve) => {
+    console.log(`Deleting data for user: ${userId}`);
+    // Симуляція видалення (тут має бути ваша логіка)
+    resolve();
+  });
+}
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
